@@ -1,0 +1,11 @@
+# -*- vscode -*-
+
+.vscode
+!.vscode/launch.json
+
+# -*- code -*-
+
+build/*
+!build/.gitkeep
+
+**/*.out

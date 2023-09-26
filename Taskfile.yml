@@ -1,0 +1,16 @@
+version: '3'
+
+env:
+  OUTPUT_FILE: build/main.out
+  MAIN_SOURCE_FILE: cmd/main.go
+
+tasks:
+  run:
+    cmds:
+      - task: build
+      - $OUTPUT_FILE
+    silent: true
+  build:
+    cmds:
+      - go build -o $OUTPUT_FILE $MAIN_SOURCE_FILE
+    silent: true
