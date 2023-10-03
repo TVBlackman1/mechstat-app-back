@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"mechstat/internal/handlers"
 )
 
 func main() {
 	fmt.Println("hello world")
+	routes := handlers.InitRoutes()
+	routes.Run()
 }
 
 // договор (заказчик, внутренняя, сторонняя)
