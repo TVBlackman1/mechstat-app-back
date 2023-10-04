@@ -1,16 +1,40 @@
 version: '3'
 
 env:
+  ENV: testing
+
+vars:
   OUTPUT_FILE: build/main.out
   MAIN_SOURCE_FILE: cmd/main.go
+  ENV: configs
 
 tasks:
-  run:
+  default:
     cmds:
-      - task: build
-      - $OUTPUT_FILE
+      - task: debug
+  release:
+    aliases: [rel]
+    cmds:
+      - task: run
+        vars: { GIN_MODE: release }
+    silent: true
+  debug:
+    aliases: [dev, develop]
+    cmds:
+      - task: run
+        vars: { GIN_MODE: debug }
     silent: true
   build:
     cmds:
-      - go build -o $OUTPUT_FILE $MAIN_SOURCE_FILE
+      - go build -o {{.OUTPUT_FILE}} {{.MAIN_SOURCE_FILE}}
     silent: true
+  run:
+    aliases: [dev, develop]
+    dotenv: ['.env', '{{.ENV}}/.env', '{{.ENV}}/default.env'] # priority from left to right for each variable separately
+    env:
+      GIN_MODE: '{{.GIN_MODE}}'
+    cmds:
+      - task: build
+      - ./{{.OUTPUT_FILE}}
+    silent: true
+    internal: true
