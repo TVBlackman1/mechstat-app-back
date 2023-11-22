@@ -18,7 +18,7 @@ func InitRoutes() *gin.Engine {
 
 	app.GET("/experiments", func(ctx *gin.Context) {
 		// TODO change to default gin using
-		res, _ := json.Marshal(demo.GetExperiments())
+		res, _ := json.Marshal(demo.GetExperimentsRandomly(30))
 		ctx.Writer.Header().Add("Content-Type", "application/json")
 		ctx.Writer.Write(res)
 	})

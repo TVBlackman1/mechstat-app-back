@@ -23,6 +23,22 @@ func GetExperiments() []Experiment {
 	}
 }
 
+var index = 0
+
+func GetExperimentsRandomly(count int) []Experiment {
+	experiments := make([]Experiment, 0, count)
+	lastIndex := index + count
+	for ; index < lastIndex; index++ {
+		experiments = append(experiments, Experiment{
+			Number:         index + 1,
+			Material:       "Ст_20_300",
+			Responsible:    "Анатольев А. Н.",
+			ExperimentType: "растяжение",
+		})
+	}
+	return experiments
+}
+
 type Experiment struct {
 	Number         int    `json:"number"`
 	Material       string `json:"material"`
