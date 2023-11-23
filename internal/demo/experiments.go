@@ -23,14 +23,12 @@ func GetExperiments() []Experiment {
 	}
 }
 
-var index = 0
-
-func GetExperimentsRandomly(count int) []Experiment {
+func GetExperimentsPagination(page int) []Experiment {
+	count := 30
 	experiments := make([]Experiment, 0, count)
-	lastIndex := index + count
-	for ; index < lastIndex; index++ {
+	for i := (page - 1) * count; i < count*page; i++ {
 		experiments = append(experiments, Experiment{
-			Number:         index + 1,
+			Number:         i + 1,
 			Material:       "Ст_20_300",
 			Responsible:    "Анатольев А. Н.",
 			ExperimentType: "растяжение",
